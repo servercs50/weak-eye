@@ -1,8 +1,10 @@
-let btn = document.getElementById('sync_text');
-btn.addEventListener('click', function () {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {action: "black_white"}, function(response) {
-            console.log(response.farewell);
+let btns = document.getElementsByClassName("defect-name");
+for (let i = 0; i < btns.length; i++) {
+    btns[i].addEventListener('click', function (e) {
+        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+            let defectType = e.target.id;
+            chrome.tabs.sendMessage(tabs[0].id, {defect: defectType}, function (response) {
+            });
         });
-    });
-}, false);
+    }, false);
+}
