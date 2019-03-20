@@ -3,14 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Weak eye</title>
+    <style>
+        body {
+            background-color: azure;
+            font-size: 14px;
+        }
+        form {
+            width: 250px;
+        }
+        .defect-name {
+            width: 100%;
+            margin-bottom: 5px;
+            padding: 5px;
+            color: white;
+            background: rgb(64,199,129);
+        }
+        .defect-name:hover {
+            background: rgb(53, 167, 110);
+        }
+    </style>
 </head>
 <body>
-    <p>Выберите тип цветовой слепоты</p>
-    <button class="defect-name" id="deuteranopia">Дейтеранопия</button>
-    <button class="defect-name" id="protanopia">Протанопия</button>
-    <button class="defect-name" id="tritanopia">Тританопия</button>
-    <button class="defect-name" id="achromotopsia">Ахроматопсия</button>
-    <button class="defect-name" id="nofilter">Убрать фильтр</button>
+    <form action="">
+        <p><b>Выберите тип цветовой слепоты:</b></p>
+        <label for="deuteranopia">Нарушение восприятия зеленого</label>
+        <button class="defect-name" id="deuteranopia">Дейтеранопия</button><br>
+        <label for="protanopia">Нарушение восприятия красного</label>
+        <button class="defect-name" id="protanopia">Протанопия</button><br>
+        <label for="tritanopia">Нарушение восприятия синего</label>
+        <button class="defect-name" id="tritanopia">Тританопия</button><br>
+        <label for="achromotopsia">Полная цветовая слепота</label>
+        <button class="defect-name" id="achromotopsia">Ахроматопсия</button><br>
+        <button class="defect-name" id="nofilter">Убрать фильтр</button>
+    </form>
     <script src="popup.js"></script>
 </body>
 </html>

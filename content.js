@@ -28,6 +28,7 @@ let colorMatrix = {
 
 let blindFilter = function(defectType) {
     // применяем фильтр к странице, добавляя элемент в разметку
+    $('.filterBlock').remove();
     $('body').append(
         "<div class='filterBlock' style='visibility: visible'>" +
         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1'>" +
