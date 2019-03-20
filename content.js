@@ -6,36 +6,27 @@ chrome.runtime.onMessage.addListener(
 
 
 let blindFilter = function(defectType) {
-    function getRGB(str){
-        let match = str.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
-        return [match[1], match[2], match[3]];
-    }
-
-    $("*").each(function () {
-
-        let rgb = $(this).css("background-color");
-        let blind_rgb;
-        console.log(rgb);
-        rgb = getRGB(rgb);
-        if (JSON.stringify(rgb) !== JSON.stringify(["0", "0", "0"]) &&
-            JSON.stringify(rgb) !== JSON.stringify(["255", "255", "255"])) {
-            if (defectType === "protanopia") {
-                blind_rgb = fBlind.Protanopia(rgb);
-            } else if (defectType === "deuteranopia") {
-                blind_rgb = fBlind.Deuteranopia(rgb);
-            } else if (defectType === "tritanopia") {
-                blind_rgb = fBlind.Tritanopia(rgb);
-            }
-            blind_rgb = blind_rgb.join(", ");
-            $(this).css("cssText", "background-color:" + "rgb(" + blind_rgb + ") !important");
-        }
+    $('body').append(
+        "<div id='filterBlock' visibility='visible'>" +
+            "<svg xmlns='http://www.w3.org/2000/svg' version='1.1'>" +
+                "<defs>" +
+                    "<filter id=" + defectType + ">" +
+                    "</filter>" +
+                "</defs>" +
+            "</svg>" +
+        "</div>"
+    );
+    let feColorMatrixElement = $('<feColorMatrix>', {type: 'matrix',
+        values: '0.95 0.05 0 0 0' +
+                '0 0.433 0.567 0 0' +
+                '0 0.475 0.525 0 0' +
+                '0 0 0 1 0'
     });
+    $('#' + defectType).append(feColorMatrixElement);
+    $("body").css({'filter': 'url("#' + defectType + '")'});
+    $("body").hide().show(0);
 };
 
 $(document).ready(function () {
-    // let images = $('img');
-    // console.log(images);
-    // images.each(function () {
-    //     console.log($(this)[0].clientWidth + " " + $(this)[0].clientHeight);
-    // });
+    blindFilter("deuteranopia");
 });
